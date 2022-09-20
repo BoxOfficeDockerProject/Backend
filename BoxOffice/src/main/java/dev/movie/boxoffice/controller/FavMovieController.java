@@ -1,5 +1,5 @@
 package dev.movie.boxoffice.controller;
-import dev.movie.boxoffice.FavMovieService;
+import dev.movie.boxoffice.service.FavMovieService;
 import dev.movie.boxoffice.dto.FavMovieDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package dev.movie.boxoffice.controller;
 
-import dev.movie.boxoffice.UserServiceImpl;
+import dev.movie.boxoffice.service.UserServiceImpl;
 import dev.movie.boxoffice.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

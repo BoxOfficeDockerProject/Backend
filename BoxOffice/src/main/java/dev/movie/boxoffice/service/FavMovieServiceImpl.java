@@ -1,4 +1,4 @@
-package dev.movie.boxoffice;
+package dev.movie.boxoffice.service;
 import dev.movie.boxoffice.dto.FavMovieDto;
 import dev.movie.boxoffice.dto.UserDto;
 import dev.movie.boxoffice.entity.FavMovie;
