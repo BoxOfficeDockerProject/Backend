@@ -8,6 +8,7 @@ public interface FavMovieService {
 
     FavMovieDto createFvMovie(Long userSeq, FavMovieDto dto);
     List<FavMovieDto> readAllFvMovie();
+    List<FavMovieDto> readUserFvMovie(Long userSeq);
     FavMovieDto updateFvMovie(Long userSeq, Long movieSeq, FavMovieDto dto);
     Boolean deleteFvMovie(Long userSeq, Long movieSeq);
 

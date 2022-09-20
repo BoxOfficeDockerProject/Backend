@@ -89,6 +89,35 @@ public class FavMovieServiceImpl implements FavMovieService {
                 .collect(Collectors.toList());
     }
 
+
+
+
+    @Override
+    public List<FavMovieDto> readUserFvMovie(Long userSeq) {
+        if (!userRepository.existsById(userSeq))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        return favMovieRepository.findByUser(userSeq).stream()
+                .map(favMovie ->FavMovieDto.builder()
+                        .movieSeq(favMovie.getMovieSeq())
+                        .movieCd(favMovie.getMovieCd())
+                        .movieNm(favMovie.getMovieNm())
+                        .openDt(favMovie.getOpenDt())
+                        .audiAdd(favMovie.getAudiAdd())
+                        .thumbnail(favMovie.getThumbnail())
+                        .rating(favMovie.getRating())
+                        .comment(favMovie.getComment())
+                        .userRating(favMovie.getUserRating())
+                        .createAt(favMovie.getCreateAt())
+                        .update(favMovie.getUpdateAt())
+                        .userDto(UserDto.builder()
+                                .userSeq(userSeq)
+                                .build())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+
     @Override
     public FavMovieDto updateFvMovie(Long userSeq, Long movieSeq, FavMovieDto dto) {
         if (!userRepository.existsById(userSeq))

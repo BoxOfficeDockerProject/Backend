@@ -18,9 +18,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_seq")
     private Long userSeq;
-    @NotNull
+    @NotNull(message = "userId NotNULL")
     private String userId;
-    @NotNull
+    @NotNull(message = "userPassword NotNULL")
     private String password;
 
     protected User() {
