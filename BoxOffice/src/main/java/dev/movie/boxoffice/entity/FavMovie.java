@@ -1,10 +1,10 @@
 package dev.movie.boxoffice.entity;
 
-import com.sun.istack.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -21,9 +21,9 @@ public class FavMovie extends BaseEntity{
     private String thumbnail;
     private Float rating; //쿼리로 평점 결과값
 
-    @NotNull
+    @NotNull(message = "댓글을 작성해주세요 NOT NULL")
     private String comment;
-    @NotNull
+    @NotNull(message = "점수를 작성해주세요 NOT NULL")
     private Integer userRating;
 
     @ManyToOne(
