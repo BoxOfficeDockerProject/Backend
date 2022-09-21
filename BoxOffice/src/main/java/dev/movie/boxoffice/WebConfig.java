@@ -13,8 +13,10 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://172.19.02:8080", //backend
                         "http://172.18.0.2:3000", //frontend
-                        "https://localhost:3000",
-                        "https://127.0.0.1:3000"
+                        "http://localhost:3000",
+                        "http://127.0.0.1:3000",
+                        "http://localhost:8080",
+                        "http://127.0.0.1:8080"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")

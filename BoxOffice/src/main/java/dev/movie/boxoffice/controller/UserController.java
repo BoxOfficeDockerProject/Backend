@@ -30,4 +30,10 @@ public class UserController {
             return ResponseEntity.ok(memberList);
     }
 
+    @GetMapping("{userId}")
+    public ResponseEntity<UserDto> readUser(@PathVariable("userId") Long userId){
+        UserDto result = this.memberService.readUser(userId);
+        return ResponseEntity.ok(result);
+    }
+
 }

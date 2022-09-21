@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface FavMovieService {
 
-    FavMovieDto createFvMovie(Long userSeq, FavMovieDto dto);
+    FavMovieDto createFvMovie(Long userId, FavMovieDto dto);
     List<FavMovieDto> readAllFvMovie();
-    List<FavMovieDto> readUserFvMovie(Long userSeq);
-    FavMovieDto updateFvMovie(Long userSeq, Long movieSeq, FavMovieDto dto);
-    Boolean deleteFvMovie(Long userSeq, Long movieSeq);
+    List<FavMovieDto> readUserFvMovie(Long userId);
+    FavMovieDto updateFvMovie(Long userId, Long movieSeq, FavMovieDto dto);
+    Boolean deleteFvMovie(Long userId, Long movieSeq);
 
 }

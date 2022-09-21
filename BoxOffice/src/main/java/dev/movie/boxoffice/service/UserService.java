@@ -9,5 +9,6 @@ public interface UserService {
 
     UserDto createUser(UserDto dto);
     List<UserDto> readAllUser();
+    UserDto readUser(Long userId);
 
 }

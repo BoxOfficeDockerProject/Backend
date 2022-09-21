@@ -16,10 +16,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_seq")
-    private Long userSeq;
-    @NotNull(message = "userId NotNULL")
-    private String userId;
+    @Column(name = "user_id")
+    private Long userId;
+    @NotNull(message = "userName NotNULL")
+    private String userName;
     @NotNull(message = "userPassword NotNULL")
     private String password;
 
@@ -27,9 +27,9 @@ public class User {
     }
 
     @Builder
-    public User(Long userSeq, String userId, String password) {
-        this.userSeq = userSeq;
+    public User(Long userId, String userName, String password) {
         this.userId = userId;
+        this.userName = userName;
         this.password = password;
     }
 }

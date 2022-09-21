@@ -7,14 +7,14 @@ import lombok.Getter;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
-    private Long userSeq;
-    private String userId;
+    private Long userId;
+    private String userName;
     private String password;
 
     @Builder
-    public UserDto(Long userSeq, String userId, String password) {
-        this.userSeq = userSeq;
+    public UserDto(Long userId, String userName, String password) {
         this.userId = userId;
+        this.userName = userName;
         this.password = password;
     }
 }

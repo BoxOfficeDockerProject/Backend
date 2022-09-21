@@ -24,10 +24,10 @@ public class FavMovieServiceImpl implements FavMovieService {
     private final UserRepository userRepository;
 
     @Override
-    public FavMovieDto createFvMovie(Long userSeq, FavMovieDto dto) {
-        if (!userRepository.existsById(userSeq))
+    public FavMovieDto createFvMovie(Long userId, FavMovieDto dto) {
+        if (!userRepository.existsById(userId))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        Optional<User> userOptional = userRepository.findById(userSeq);
+        Optional<User> userOptional = userRepository.findById(userId);
         User user = userOptional.get();
 
         FavMovie favMovie = FavMovie.builder()
@@ -41,7 +41,7 @@ public class FavMovieServiceImpl implements FavMovieService {
                 .comment(dto.getComment())
                 .userRating(dto.getUserRating())
                 .user(User.builder()
-                        .userSeq(userSeq)
+                        .userId(userId)
                         .build())
                 .build();
         FavMovie result = this.favMovieRepository.save(favMovie);
@@ -59,8 +59,8 @@ public class FavMovieServiceImpl implements FavMovieService {
                 .createAt(result.getCreateAt())  //todo: 시간 안나옴
                 .update(result.getUpdateAt())
                 .userDto(UserDto.builder()
-                        .userSeq(user.getUserSeq())
                         .userId(user.getUserId())
+                        .userName(user.getUserName())
                         .build())
                 .build();
         return favMovieDto;
@@ -91,13 +91,17 @@ public class FavMovieServiceImpl implements FavMovieService {
 
 
 
-
+    //fk 유저로 조회
     @Override
-    public List<FavMovieDto> readUserFvMovie(Long userSeq) {
-        if (!userRepository.existsById(userSeq))
+    public List<FavMovieDto> readUserFvMovie(Long userId) {
+        if (!userRepository.existsById(userId))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        return favMovieRepository.findByUser(userSeq).stream()
+        User userTrans = User.builder()
+                .userId(userId)
+                .build();
+
+        return favMovieRepository.findByUser(userTrans).stream()
                 .map(favMovie ->FavMovieDto.builder()
                         .movieSeq(favMovie.getMovieSeq())
                         .movieCd(favMovie.getMovieCd())
@@ -111,7 +115,7 @@ public class FavMovieServiceImpl implements FavMovieService {
                         .createAt(favMovie.getCreateAt())
                         .update(favMovie.getUpdateAt())
                         .userDto(UserDto.builder()
-                                .userSeq(userSeq)
+                                .userId(userId)
                                 .build())
                         .build())
                 .collect(Collectors.toList());
@@ -119,10 +123,10 @@ public class FavMovieServiceImpl implements FavMovieService {
 
 
     @Override
-    public FavMovieDto updateFvMovie(Long userSeq, Long movieSeq, FavMovieDto dto) {
-        if (!userRepository.existsById(userSeq))
+    public FavMovieDto updateFvMovie(Long userId, Long movieSeq, FavMovieDto dto) {
+        if (!userRepository.existsById(userId))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        Optional<User> userOptional = userRepository.findById(userSeq);
+        Optional<User> userOptional = userRepository.findById(userId);
 
         Optional<FavMovie> favMovieOptional = favMovieRepository.findById(movieSeq);
         if (!favMovieOptional.get().getMovieSeq().equals(movieSeq))
@@ -139,7 +143,7 @@ public class FavMovieServiceImpl implements FavMovieService {
                 .comment(dto.getComment()==null? favMovieOptional.get().getComment() : dto.getComment())
                 .userRating(dto.getUserRating())
                 .user(User.builder()
-                        .userSeq(userSeq)
+                        .userId(userId)
                         .build())
                 .build();
         FavMovie result = this.favMovieRepository.save(favMovie);
@@ -157,16 +161,16 @@ public class FavMovieServiceImpl implements FavMovieService {
                 .createAt(result.getCreateAt())  //todo: 시간 안나옴
                 .update(result.getUpdateAt())
                 .userDto(UserDto.builder()
-                        .userSeq(userOptional.get().getUserSeq())
                         .userId(userOptional.get().getUserId())
+                        .userName(userOptional.get().getUserName())
                         .build())
                 .build();
         return favMovieDto;
     }
 
     @Override
-    public Boolean deleteFvMovie(Long userSeq, Long movieSeq) {
-        if (!userRepository.existsById(userSeq))
+    public Boolean deleteFvMovie(Long userId, Long movieSeq) {
+        if (!userRepository.existsById(userId))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         if (!favMovieRepository.existsById(movieSeq))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

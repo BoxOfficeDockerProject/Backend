@@ -30,7 +30,7 @@ public class FavMovie extends BaseEntity{
             fetch = FetchType.LAZY,
             targetEntity = User.class
     )
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
 

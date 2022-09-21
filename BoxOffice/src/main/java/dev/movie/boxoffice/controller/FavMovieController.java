@@ -15,9 +15,9 @@ public class FavMovieController {
 
     //api/v1/movie?userSeq={1}
     @PostMapping()
-    public ResponseEntity<FavMovieDto> createMovie(@RequestParam Long userSeq,
+    public ResponseEntity<FavMovieDto> createMovie(@RequestParam Long userId,
                                                     @RequestBody FavMovieDto dto){
-        FavMovieDto result = this.movieService.createFvMovie(userSeq, dto);
+        FavMovieDto result = this.movieService.createFvMovie(userId, dto);
         return ResponseEntity.ok(result);
     }
 
@@ -33,8 +33,8 @@ public class FavMovieController {
 
     //유저가 선택한 관심영화조회  *아직작업중
     @GetMapping()
-    public ResponseEntity<List<FavMovieDto>> readMovie(@RequestParam(name = "userId")Long userSeq){
-        List<FavMovieDto> favMovieDtoList = this.movieService.readUserFvMovie(userSeq);
+    public ResponseEntity<List<FavMovieDto>> readMovie(@RequestParam Long userId){
+        List<FavMovieDto> favMovieDtoList = this.movieService.readUserFvMovie(userId);
         if (favMovieDtoList == null)
             return ResponseEntity.notFound().build();
         else
@@ -44,17 +44,17 @@ public class FavMovieController {
 
     @PutMapping("/{movieSeq}")
     public ResponseEntity<FavMovieDto> updateMovie(@PathVariable("movieSeq") Long movieSeq,
-                                                   @RequestParam Long userSeq,
+                                                   @RequestParam Long userId,
                                                    @RequestBody FavMovieDto dto){
-       FavMovieDto result = this.movieService.updateFvMovie(userSeq, movieSeq, dto);
+       FavMovieDto result = this.movieService.updateFvMovie(userId, movieSeq, dto);
             return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/{movieSeq}")
-    public ResponseEntity<?> deleteMovie(@RequestParam Long userSeq,
+    public ResponseEntity<?> deleteMovie(@RequestParam Long userId,
                                                    @PathVariable("movieSeq") Long movieSeq){
 
-        if (!movieService.deleteFvMovie(userSeq, movieSeq))
+        if (!movieService.deleteFvMovie(userId, movieSeq))
             return ResponseEntity.notFound().build();
         return ResponseEntity.notFound().build();
     }
