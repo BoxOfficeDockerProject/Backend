@@ -140,7 +140,7 @@ public class FavMovieServiceImpl implements FavMovieService {
                 .audiAdd(dto.getAudiAdd())
                 .thumbnail(dto.getThumbnail())
                 .rating(dto.getRating())
-                .comment(dto.getComment()==null? favMovieOptional.get().getComment() : dto.getComment())
+                .comment(dto.getComment())
                 .userRating(dto.getUserRating())
                 .user(User.builder()
                         .userId(userId)

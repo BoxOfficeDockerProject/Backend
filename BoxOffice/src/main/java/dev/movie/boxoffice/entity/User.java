@@ -19,6 +19,7 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
     @NotNull(message = "userName NotNULL")
+    @Column(unique = true)
     private String userName;
     @NotNull(message = "userPassword NotNULL")
     private String password;
