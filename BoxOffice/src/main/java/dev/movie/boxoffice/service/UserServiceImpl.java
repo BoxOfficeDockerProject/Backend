@@ -65,12 +65,11 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserDto loginUser(UserDto dto) {
-        logger.info("아이디1{}", dto.getUserName());
-        Optional<User> userOptional = memberRepository.findByUserName(dto.getUserName());
+    public UserDto loginUser(String userName, String password) {
 
-        logger.info("아이디2{}", userOptional.get().getUserName());
-        if(!userOptional.get().getPassword().equals(dto.getPassword()))
+        Optional<User> userOptional = memberRepository.findByUserName(userName);
+
+        if(!userOptional.get().getPassword().equals(password))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
         UserDto userDto = UserDto.builder()

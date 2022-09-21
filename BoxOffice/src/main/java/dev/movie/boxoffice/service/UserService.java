@@ -10,6 +10,6 @@ public interface UserService {
     UserDto signupUser(UserDto dto);
     List<UserDto> readAllUser();
     UserDto readUser(Long userId);
-    UserDto loginUser(UserDto dto);
+    UserDto loginUser(String userName, String password);
 
 }
