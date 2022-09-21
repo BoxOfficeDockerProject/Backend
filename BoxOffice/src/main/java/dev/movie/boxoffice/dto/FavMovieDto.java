@@ -11,7 +11,7 @@ public class FavMovieDto {
     private String movieCd;
     private String movieNm;
     private String openDt;
-    private String audiAdd;
+    private String audiAcc;
     private String thumbnail;
     private Float rating;
     private String comment;
@@ -22,12 +22,12 @@ public class FavMovieDto {
     private Instant update; //수정시간
 
     @Builder
-    public FavMovieDto(Long movieSeq, String movieCd, String movieNm, String openDt, String audiAdd, String thumbnail, Float rating, String comment, Integer userRating, UserDto userDto, Instant createAt, Instant update) {
+    public FavMovieDto(Long movieSeq, String movieCd, String movieNm, String openDt, String audiAcc, String thumbnail, Float rating, String comment, Integer userRating, UserDto userDto, Instant createAt, Instant update) {
         this.movieSeq = movieSeq;
         this.movieCd = movieCd;
         this.movieNm = movieNm;
         this.openDt = openDt;
-        this.audiAdd = audiAdd;
+        this.audiAcc = audiAcc;
         this.thumbnail = thumbnail;
         this.rating = rating;
         this.comment = comment;

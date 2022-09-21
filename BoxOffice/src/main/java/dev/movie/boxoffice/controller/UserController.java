@@ -21,7 +21,7 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<List<UserDto>> readAllUser(){
         List<UserDto> memberList = this.memberService.readAllUser();
         if (memberList == null)
@@ -30,8 +30,8 @@ public class UserController {
             return ResponseEntity.ok(memberList);
     }
 
-    @GetMapping("{userId}")
-    public ResponseEntity<UserDto> readUser(@PathVariable("userId") Long userId){
+    @GetMapping()
+    public ResponseEntity<UserDto> readUser(@RequestParam Long userId){
         UserDto result = this.memberService.readUser(userId);
         return ResponseEntity.ok(result);
     }

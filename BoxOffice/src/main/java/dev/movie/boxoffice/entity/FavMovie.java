@@ -17,7 +17,7 @@ public class FavMovie extends BaseEntity{
     private String movieCd;
     private String movieNm;
     private String openDt; //openAPI 그대로 가져오는거면 String
-    private String audiAdd;
+    private String audiAcc;
     private String thumbnail;
     private Float rating; //쿼리로 평점 결과값
 
@@ -38,12 +38,13 @@ public class FavMovie extends BaseEntity{
     }
 
     @Builder
-    public FavMovie(Long movieSeq, String movieCd, String movieNm, String openDt, String audiAdd, String thumbnail, Float rating, String comment, Integer userRating, User user) {
+
+    public FavMovie(Long movieSeq, String movieCd, String movieNm, String openDt, String audiAcc, String thumbnail, Float rating, String comment, Integer userRating, User user) {
         this.movieSeq = movieSeq;
         this.movieCd = movieCd;
         this.movieNm = movieNm;
         this.openDt = openDt;
-        this.audiAdd = audiAdd;
+        this.audiAcc = audiAcc;
         this.thumbnail = thumbnail;
         this.rating = rating;
         this.comment = comment;
