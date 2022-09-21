@@ -31,10 +31,14 @@ public class FavMovieServiceImpl implements FavMovieService {
         Optional<User> userOptional = userRepository.findById(userId);
         User user = userOptional.get();
 
-        if (favMovieRepository.findByMovieCd(dto.getMovieCd())!=null) {
-            return null;
-        }else{
+        User userTrans = User.builder()
+                .userId(userId)
+                .build();
 
+        if (favMovieRepository.checkMovie(dto.getMovieCd(), userTrans)!= null) {
+            return null;
+        }
+        else {
             FavMovie favMovie = FavMovie.builder()
                     .movieSeq(dto.getMovieSeq())
                     .movieCd(dto.getMovieCd())
@@ -51,7 +55,6 @@ public class FavMovieServiceImpl implements FavMovieService {
                     .build();
 
             FavMovie result = this.favMovieRepository.save(favMovie);
-
 
             FavMovieDto favMovieDto = FavMovieDto.builder()
                     .movieSeq(result.getMovieSeq())
@@ -71,8 +74,8 @@ public class FavMovieServiceImpl implements FavMovieService {
                             .build())
                     .build();
             return favMovieDto;
-        }
 
+        }
     }
 
 
@@ -97,8 +100,6 @@ public class FavMovieServiceImpl implements FavMovieService {
                         .build())
                 .collect(Collectors.toList());
     }
-
-
 
     //fk 유저로 조회
     @Override
