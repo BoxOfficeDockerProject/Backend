@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDto createUser(UserDto dto);
+    UserDto signupUser(UserDto dto);
     List<UserDto> readAllUser();
     UserDto readUser(Long userId);
+    UserDto loginUser(UserDto dto);
 
 }

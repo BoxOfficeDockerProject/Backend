@@ -3,6 +3,9 @@ package dev.movie.boxoffice.controller;
 import dev.movie.boxoffice.service.UserServiceImpl;
 import dev.movie.boxoffice.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +16,12 @@ import java.util.List;
 @RestController()
 @RequestMapping("api/v1/user")
 public class UserController {
+    Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserServiceImpl memberService;
 
-    @PostMapping()
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto dto){
-        UserDto result = this.memberService.createUser(dto);
+    @PostMapping("/signup")
+    public ResponseEntity<UserDto> signUpUser(@RequestBody UserDto dto){
+        UserDto result = this.memberService.signupUser(dto);
         return ResponseEntity.ok(result);
     }
 
@@ -35,5 +39,13 @@ public class UserController {
         UserDto result = this.memberService.readUser(userId);
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<UserDto> loginUser(@RequestBody UserDto dto){
+        logger.info("userController{}",dto.getUserName());
+       UserDto result = this.memberService.loginUser(dto);
+       return ResponseEntity.ok(result);
+    }
+
 
 }

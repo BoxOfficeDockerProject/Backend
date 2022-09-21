@@ -3,6 +3,8 @@ import dev.movie.boxoffice.dto.UserDto;
 import dev.movie.boxoffice.entity.User;
 import dev.movie.boxoffice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository memberRepository;
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public UserDto createUser(UserDto dto) {
+    public UserDto signupUser(UserDto dto) {
         User member = User.builder()
                 .userName(dto.getUserName())
                 .password(dto.getPassword())
@@ -58,4 +61,24 @@ public class UserServiceImpl implements UserService {
                 .build();
         return userDto;
     }
+
+
+
+    @Override
+    public UserDto loginUser(UserDto dto) {
+        logger.info("아이디1{}", dto.getUserName());
+        Optional<User> userOptional = memberRepository.findByUserName(dto.getUserName());
+
+        logger.info("아이디2{}", userOptional.get().getUserName());
+        if(!userOptional.get().getPassword().equals(dto.getPassword()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+
+        UserDto userDto = UserDto.builder()
+                .userId(userOptional.get().getUserId())
+                .userName(userOptional.get().getUserName())
+                .build();
+        return userDto;
+    }
+
+
 }
