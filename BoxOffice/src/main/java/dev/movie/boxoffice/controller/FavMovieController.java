@@ -31,7 +31,6 @@ public class FavMovieController {
             return ResponseEntity.ok(favMovieDtoList);
     }
 
-    //유저가 선택한 관심영화조회  *아직작업중
     @GetMapping()
     public ResponseEntity<List<FavMovieDto>> readMovie(@RequestParam Long userId){
         List<FavMovieDto> favMovieDtoList = this.movieService.readUserFvMovie(userId);
@@ -53,7 +52,6 @@ public class FavMovieController {
     @DeleteMapping("/{movieSeq}")
     public ResponseEntity<?> deleteMovie(@RequestParam Long userId,
                                                    @PathVariable("movieSeq") Long movieSeq){
-
         if (!movieService.deleteFvMovie(userId, movieSeq))
             return ResponseEntity.notFound().build();
         return ResponseEntity.notFound().build();

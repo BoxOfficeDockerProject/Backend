@@ -43,7 +43,6 @@ public class UserController {
     @GetMapping("/login")
     public ResponseEntity<UserDto> loginUser(@RequestParam String userName,
                                              @RequestParam String password){
-
        UserDto result = this.memberService.loginUser(userName, password);
        return ResponseEntity.ok(result);
     }

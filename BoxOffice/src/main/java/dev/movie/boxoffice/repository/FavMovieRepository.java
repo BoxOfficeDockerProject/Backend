@@ -11,5 +11,6 @@ import java.util.List;
 
 public interface FavMovieRepository extends JpaRepository<FavMovie, Long> {
    List<FavMovie> findByUser(User userId);
+   Boolean findByMovieCd(String movieCd);
 
 }

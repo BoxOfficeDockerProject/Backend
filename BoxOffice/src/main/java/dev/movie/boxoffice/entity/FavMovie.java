@@ -38,7 +38,6 @@ public class FavMovie extends BaseEntity{
     }
 
     @Builder
-
     public FavMovie(Long movieSeq, String movieCd, String movieNm, String openDt, String audiAcc, String thumbnail, Float rating, String comment, Integer userRating, User user) {
         this.movieSeq = movieSeq;
         this.movieCd = movieCd;

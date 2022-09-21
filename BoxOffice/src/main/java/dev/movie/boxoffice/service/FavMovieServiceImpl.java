@@ -27,43 +27,52 @@ public class FavMovieServiceImpl implements FavMovieService {
     public FavMovieDto createFvMovie(Long userId, FavMovieDto dto) {
         if (!userRepository.existsById(userId))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
         Optional<User> userOptional = userRepository.findById(userId);
         User user = userOptional.get();
 
-        FavMovie favMovie = FavMovie.builder()
-                .movieSeq(dto.getMovieSeq())
-                .movieCd(dto.getMovieCd())
-                .movieNm(dto.getMovieNm())
-                .openDt(dto.getOpenDt())
-                .audiAcc(dto.getAudiAcc())
-                .thumbnail(dto.getThumbnail())
-                .rating(dto.getRating())
-                .comment(dto.getComment())
-                .userRating(dto.getUserRating())
-                .user(User.builder()
-                        .userId(userId)
-                        .build())
-                .build();
-        FavMovie result = this.favMovieRepository.save(favMovie);
+        if (favMovieRepository.findByMovieCd(dto.getMovieCd())!=null) {
+            return null;
+        }else{
 
-        FavMovieDto favMovieDto = FavMovieDto.builder()
-                .movieSeq(result.getMovieSeq())
-                .movieCd(result.getMovieCd())
-                .movieNm(result.getMovieNm())
-                .openDt(result.getOpenDt())
-                .audiAcc(result.getAudiAcc())
-                .thumbnail(result.getThumbnail())
-                .rating(result.getRating())
-                .comment(result.getComment())
-                .userRating(result.getUserRating())
-                .createAt(result.getCreateAt())  //todo: 시간 안나옴
-                .update(result.getUpdateAt())
-                .userDto(UserDto.builder()
-                        .userId(user.getUserId())
-                        .userName(user.getUserName())
-                        .build())
-                .build();
-        return favMovieDto;
+            FavMovie favMovie = FavMovie.builder()
+                    .movieSeq(dto.getMovieSeq())
+                    .movieCd(dto.getMovieCd())
+                    .movieNm(dto.getMovieNm())
+                    .openDt(dto.getOpenDt())
+                    .audiAcc(dto.getAudiAcc())
+                    .thumbnail(dto.getThumbnail())
+                    .rating(dto.getRating())
+                    .comment(dto.getComment())
+                    .userRating(dto.getUserRating())
+                    .user(User.builder()
+                            .userId(userId)
+                            .build())
+                    .build();
+
+            FavMovie result = this.favMovieRepository.save(favMovie);
+
+
+            FavMovieDto favMovieDto = FavMovieDto.builder()
+                    .movieSeq(result.getMovieSeq())
+                    .movieCd(result.getMovieCd())
+                    .movieNm(result.getMovieNm())
+                    .openDt(result.getOpenDt())
+                    .audiAcc(result.getAudiAcc())
+                    .thumbnail(result.getThumbnail())
+                    .rating(result.getRating())
+                    .comment(result.getComment())
+                    .userRating(result.getUserRating())
+                    .createAt(result.getCreateAt())  //todo: 시간 안나옴
+                    .update(result.getUpdateAt())
+                    .userDto(UserDto.builder()
+                            .userId(user.getUserId())
+                            .userName(user.getUserName())
+                            .build())
+                    .build();
+            return favMovieDto;
+        }
+
     }
 
 

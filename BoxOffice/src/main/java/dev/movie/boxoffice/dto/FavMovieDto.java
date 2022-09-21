@@ -18,7 +18,7 @@ public class FavMovieDto {
     private Integer userRating;
     private UserDto userDto;
 
-    private Instant createAt;//생성시간
+    private Instant createAt;//생성시간 todo: 이부분 해결해야함
     private Instant update; //수정시간
 
     @Builder
