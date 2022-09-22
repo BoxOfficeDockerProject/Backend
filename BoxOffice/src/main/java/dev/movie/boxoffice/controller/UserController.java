@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController()
-@RequestMapping("api/v1/user")
+@RequestMapping("user")
 public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserServiceImpl memberService;

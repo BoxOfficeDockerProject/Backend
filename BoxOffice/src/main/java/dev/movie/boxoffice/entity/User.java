@@ -1,12 +1,7 @@
 package dev.movie.boxoffice.entity;
-
-
 import javax.persistence.*;
-
 import lombok.Builder;
 import lombok.Getter;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
