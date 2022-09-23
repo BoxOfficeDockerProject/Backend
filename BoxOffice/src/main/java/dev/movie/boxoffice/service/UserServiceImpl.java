@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository memberRepository;
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);

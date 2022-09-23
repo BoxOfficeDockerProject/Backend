@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+@Transactional   //default - DBMS의 기본 격리 수준 적용
 public class FavMovieServiceImpl implements FavMovieService {
     Logger logger = LoggerFactory.getLogger(FavMovieServiceImpl.class);
     private final FavMovieRepository favMovieRepository;
