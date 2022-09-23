@@ -5,8 +5,8 @@ import dev.movie.boxoffice.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
+    @Transactional(readOnly = true)
     public ResponseEntity<List<UserDto>> readAllUser(){
         List<UserDto> memberList = this.memberService.readAllUser();
         if (memberList == null)
@@ -35,6 +36,7 @@ public class UserController {
     }
 
     @GetMapping()
+    @Transactional(readOnly = true)
     public ResponseEntity<UserDto> readUser(@RequestParam Long userId){
         UserDto result = this.memberService.readUser(userId);
         return ResponseEntity.ok(result);

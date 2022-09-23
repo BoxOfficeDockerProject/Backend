@@ -13,7 +13,6 @@ import java.util.List;
 public class FavMovieController {
     private final FavMovieService movieService;
 
-    //api/v1/movie?userSeq={1}
     @PostMapping()
     public ResponseEntity<FavMovieDto> createMovie(@RequestParam Long userId,
                                                     @RequestBody FavMovieDto dto){
@@ -21,8 +20,7 @@ public class FavMovieController {
         return ResponseEntity.ok(result);
     }
 
-    //전체 영화조회 *제외해도 됨
-    @GetMapping("/like")
+    @GetMapping("/all")
     public ResponseEntity<List<FavMovieDto>> readAllMovie(){
         List<FavMovieDto> favMovieDtoList = this.movieService.readAllFvMovie();
         if (favMovieDtoList == null)

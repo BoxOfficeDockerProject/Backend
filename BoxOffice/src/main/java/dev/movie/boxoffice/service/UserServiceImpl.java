@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<UserDto> readAllUser() {
         return memberRepository.findAll().stream()
                 .map(member -> UserDto.builder()
@@ -49,12 +48,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDto readUser(Long userId) {
         if (!memberRepository.existsById(userId))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         Optional<User> userOptional = memberRepository.findById(userId);
-
         UserDto userDto = UserDto.builder()
                 .userId(userOptional.get().getUserId())
                 .userName(userOptional.get().getUserName())
@@ -63,10 +62,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public UserDto loginUser(String userName, String password) {
-
         Optional<User> userOptional = memberRepository.findByUserName(userName);
 
         if(!userOptional.get().getPassword().equals(password))
