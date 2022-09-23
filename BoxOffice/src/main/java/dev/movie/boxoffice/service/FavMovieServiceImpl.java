@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -80,6 +81,7 @@ public class FavMovieServiceImpl implements FavMovieService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<FavMovieDto> readAllFvMovie() {
         if (favMovieRepository.findAll().isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -103,6 +105,7 @@ public class FavMovieServiceImpl implements FavMovieService {
 
     //fk 유저로 조회
     @Override
+    @Transactional(readOnly = true)
     public List<FavMovieDto> readUserFvMovie(Long userId) {
         if (!userRepository.existsById(userId))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
