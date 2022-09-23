@@ -25,7 +25,6 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    @Transactional(readOnly = true)
     public ResponseEntity<List<UserDto>> readAllUser(){
         List<UserDto> memberList = this.memberService.readAllUser();
         if (memberList == null)
@@ -35,7 +34,6 @@ public class UserController {
     }
 
     @GetMapping()
-    @Transactional(readOnly = true)
     public ResponseEntity<UserDto> readUser(@RequestParam Long userId){
         UserDto result = this.memberService.readUser(userId);
         return ResponseEntity.ok(result);
