@@ -1,11 +1,8 @@
-server:
-  port: 8080
-
 spring:
-  profiles:
-    active: aws
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
 

@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         Optional<User> userOptional = memberRepository.findById(userId);
+
         UserDto userDto = UserDto.builder()
                 .userId(userOptional.get().getUserId())
                 .userName(userOptional.get().getUserName())
@@ -68,7 +69,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = memberRepository.findByUserName(userName);
 
         if(!userOptional.get().getPassword().equals(password))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         UserDto userDto = UserDto.builder()
                 .userId(userOptional.get().getUserId())

@@ -36,4 +36,6 @@ public class FavMovieDto {
         this.createAt = createAt;
         this.update = update;
     }
+
+
 }

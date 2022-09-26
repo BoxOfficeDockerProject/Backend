@@ -14,7 +14,7 @@ import java.time.Instant;
 public class BaseEntity {
 
     @CreatedDate
-    @Column(updatable = false) //누가 수정하지 못하도록 막는역할
+    @Column(updatable = false)
     private Instant createAt;
 
     @LastModifiedDate
